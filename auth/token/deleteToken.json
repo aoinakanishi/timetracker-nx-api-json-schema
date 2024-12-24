@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Auth Token Deletion",
+    "type": "object",
+    "description": "Schema for the DELETE /auth/token endpoint",
+    "endpoint": "/auth/token",
+    "properties": {
+      "request": {
+        "type": "object",
+        "description": "No request body is required for this endpoint."
+      },
+      "response": {
+        "type": "null",
+        "description": "This endpoint does not return a response body."
+      }
+    },
+    "required": []
+  }
+  

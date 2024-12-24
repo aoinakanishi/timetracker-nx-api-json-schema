@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Update Work Item",
+    "type": "object",
+    "description": "Schema for the PUT /workitem/workItems/{workItemIds} endpoint",
+    "endpoint": "/workitem/workItems/{workItemIds}",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "workItemIds": {
+            "type": "string",
+            "description": "ワークアイテムID"
+          },
+          "moveScheduleDays": {
+            "type": "integer",
+            "description": "期間を移動させる日数"
+          },
+          "clearSchedule": {
+            "type": "boolean",
+            "description": "期間をクリアするか"
+          },
+          "setCompleted": {
+            "type": "boolean",
+            "description": "進捗管理対象のアイテムを完了にするか"
+          },
+          "fields": {
+            "type": "object",
+            "description": "更新対象フィールド",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "required": ["workItemIds"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "null",
+        "description": "This endpoint does not return a response body."
+      }
+    }
+  }
+  

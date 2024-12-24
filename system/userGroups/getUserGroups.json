@@ -1,0 +1,79 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Get User Groups",
+    "type": "object",
+    "description": "Schema for the GET /system/userGroups endpoint",
+    "endpoint": "/system/userGroups",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string", "description": "名前"},
+          "englishName": {"type": "string", "description": "英語名"},
+          "code": {"type": "string", "description": "コード"},
+          "keyword": {"type": "string", "description": "指定されたキーワードで検索"},
+          "depth": {"type": "integer", "description": "取得する階層の深さ"},
+          "includeDeleted": {
+            "type": "boolean",
+            "description": "削除済みデータを取得対象に含めるか"
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "description": "削除されたデータのみを取得する場合に有効"
+          },
+          "limit": {"type": "integer", "description": "データの最大取得件数"},
+          "offset": {
+            "type": "integer",
+            "description": "何件目のデータから取得するか。省略時は0"
+          },
+          "orderby": {
+            "type": "string",
+            "description": "並び替えに使用するフィールド名。空白後に 'asc' または 'desc' を指定"
+          }
+        },
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "description": "検索条件に該当するユーザーグループの総数"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string", "description": "ユーザーグループID"},
+                "name": {"type": "string", "description": "名前"},
+                "englishName": {"type": "string", "description": "英語名"},
+                "code": {"type": "string", "description": "コード"},
+                "description": {"type": "string", "description": "説明"},
+                "treePath": {"type": "string", "description": "ツリーパス"},
+                "treeDepth": {"type": "integer", "description": "ツリーの深さ"},
+                "isProjectPrivate": {
+                  "type": "boolean",
+                  "description": "プロジェクトグループであるか"
+                },
+                "privateProjectId": {"type": "string", "description": "プロジェクトID"},
+                "subGroups": {
+                  "type": "array",
+                  "items": {"$ref": "#/properties/response/properties/data/items"}
+                },
+                "displayOrder": {"type": "number", "description": "表示順"},
+                "isDeleted": {"type": "boolean", "description": "削除されているか"},
+                "createdAt": {"type": "string", "format": "date-time", "description": "作成日時"},
+                "createdBy": {"type": "string", "description": "作成者のID"},
+                "updatedAt": {"type": "string", "format": "date-time", "description": "更新日時"},
+                "updatedBy": {"type": "string", "description": "更新者のID"}
+              },
+              "required": ["id", "name", "createdAt", "updatedAt"]
+            }
+          }
+        },
+        "required": ["totalCount", "data"]
+      }
+    }
+  }
+  

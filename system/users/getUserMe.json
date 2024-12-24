@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Get Login User",
+    "type": "object",
+    "description": "Schema for the GET /system/users/me endpoint",
+    "endpoint": "/system/users/me",
+    "properties": {
+      "request": {
+        "type": "object",
+        "description": "No request parameters are required for this endpoint."
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string", "description": "ユーザーID"},
+          "name": {"type": "string", "description": "ユーザー名"},
+          "loginName": {"type": "string", "description": "ログイン名"},
+          "email": {"type": "string", "description": "メールアドレス"},
+          "organizationName": {"type": "string", "description": "所属する組織の名前"},
+          "unitCost": {"type": "number", "description": "コスト単価"},
+          "language": {"type": "string", "description": "言語設定"},
+          "timeZone": {"type": "string", "description": "タイムゾーン"},
+          "isDeleted": {"type": "boolean", "description": "削除されているか"},
+          "authenticationType": {
+            "type": "string",
+            "description": "認証の種類",
+            "enum": ["SAML", "Basic", "Bearer"]
+          }
+        },
+        "required": ["id", "name", "loginName", "organizationName", "authenticationType"],
+        "additionalProperties": false
+      }
+    }
+  }
+  

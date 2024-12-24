@@ -1,0 +1,89 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Add Project",
+    "type": "object",
+    "description": "Schema for the POST /project/projects endpoint",
+    "endpoint": "/project/projects",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string", "description": "プロジェクト名", "minLength": 1},
+          "code": {"type": "string", "description": "プロジェクトコード", "minLength": 1},
+          "description": {"type": "string", "description": "プロジェクトの説明"},
+          "managerId": {"type": "string", "description": "管理者ID", "minLength": 1},
+          "manager": {"type": "string", "description": "管理者名"},
+          "baseProfileId": {"type": "string", "description": "プロファイルID"},
+          "baseProfile": {"type": "string", "description": "プロファイル名"},
+          "organizationId": {"type": "string", "description": "所属組織ID"},
+          "organization": {"type": "string", "description": "所属組織名"},
+          "members": {
+            "type": "array",
+            "description": "プロジェクトメンバー",
+            "items": {
+              "type": "object",
+              "properties": {
+                "partyId": {"type": "string", "description": "パーティID"},
+                "partyType": {"type": "string", "description": "メンバーの種類", "enum": ["User"]},
+                "unitCost": {"type": "number", "description": "コスト単価"}
+              },
+              "required": ["partyType"]
+            }
+          },
+          "userGroups": {
+            "type": "array",
+            "description": "プロジェクトのユーザーグループ",
+            "items": {
+              "type": "object",
+              "properties": {
+                "addUserIds": {"type": "array", "items": {"type": "string"}, "description": "追加するユーザーID"},
+                "name": {"type": "string", "description": "名前"},
+                "englishName": {"type": "string", "description": "英語名"},
+                "code": {"type": "string", "description": "コード"},
+                "description": {"type": "string", "description": "説明"},
+                "displayOrder": {"type": "number", "description": "表示順序"}
+              },
+              "required": ["name"]
+            }
+          },
+          "plannedStartDate": {"type": "string", "format": "date-time", "description": "プロジェクト開始日"},
+          "plannedFinishDate": {"type": "string", "format": "date-time", "description": "プロジェクト終了日"},
+          "isFinished": {"type": "boolean", "description": "プロジェクトが完了しているか"},
+          "standardUnitCost": {"type": "number", "description": "標準コスト"},
+          "projectCategories": {
+            "type": "object",
+            "description": "プロジェクトカテゴリ",
+            "additionalProperties": {"type": "string"}
+          },
+          "allowEditingItemsWithBrowsePermission": {
+            "type": "boolean",
+            "description": "閲覧権限があるアイテムの編集を許可するか"
+          },
+          "recordTransitionData": {
+            "type": "boolean",
+            "description": "推移データを記録するか"
+          }
+        },
+        "required": ["name", "code", "managerId", "plannedStartDate", "plannedFinishDate"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "projectId": {"type": "string", "description": "プロジェクトID"},
+          "addedMemberIds": {
+            "type": "array",
+            "description": "追加されたプロジェクトメンバーID",
+            "items": {"type": "string"}
+          },
+          "addedUserGroupIds": {
+            "type": "array",
+            "description": "追加されたユーザーグループID",
+            "items": {"type": "string"}
+          }
+        },
+        "required": ["projectId"]
+      }
+    }
+  }
+  

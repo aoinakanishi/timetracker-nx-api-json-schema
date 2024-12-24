@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Delete Time Entry",
+    "type": "object",
+    "description": "Schema for the DELETE /system/users/{userId}/timeEntries/{timeEntryIds} endpoint",
+    "endpoint": "/system/users/{userId}/timeEntries/{timeEntryIds}",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "ユーザーID"
+          },
+          "timeEntryIds": {
+            "type": "string",
+            "description": "実績工数ID"
+          }
+        },
+        "required": ["userId", "timeEntryIds"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "null",
+        "description": "This endpoint does not return a response body."
+      }
+    },
+    "required": []
+  }
+  

@@ -1,0 +1,41 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Get User",
+    "type": "object",
+    "description": "Schema for the GET /system/users/{userIds} endpoint",
+    "endpoint": "/system/users/{userIds}",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "userIds": {
+            "type": "string",
+            "description": "ユーザーID"
+          },
+          "includes": {
+            "type": "string",
+            "description": "同時に取得する情報",
+            "enum": ["UserGroups"]
+          }
+        },
+        "required": ["userIds"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string", "description": "ユーザーID"},
+            "name": {"type": "string", "description": "ユーザー名"},
+            "loginName": {"type": "string", "description": "ログイン名"},
+            "unitCost": {"type": "number", "description": "コスト単価"},
+            "organizationName": {"type": "string", "description": "所属する組織の名前"},
+            "isDeleted": {"type": "boolean", "description": "削除されているか"}
+          },
+          "required": ["id", "name", "loginName", "organizationName"]
+        }
+      }
+    }
+  }
+  

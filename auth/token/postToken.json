@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Auth Token Creation",
+    "type": "object",
+    "description": "Schema for the POST /auth/token endpoint",
+    "endpoint": "/auth/token",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "loginName": {
+            "type": "string",
+            "description": "ログイン名"
+          },
+          "password": {
+            "type": "string",
+            "description": "パスワード"
+          }
+        },
+        "required": ["loginName", "password"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "トークン文字列"
+          }
+        },
+        "required": ["token"],
+        "additionalProperties": false
+      }
+    }
+  }
+  

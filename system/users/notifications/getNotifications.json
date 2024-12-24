@@ -1,0 +1,54 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Get User Notifications",
+    "type": "object",
+    "description": "Schema for the GET /system/users/{userId}/notifications endpoint",
+    "endpoint": "/system/users/{userId}/notifications",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "ユーザーID"
+          },
+          "unread": {
+            "type": "boolean",
+            "description": "取得する通知の絞り込み。true: 未読通知のみ取得, false: 全ての通知取得"
+          }
+        },
+        "required": ["userId"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "description": "検索条件に該当する通知の総数"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string", "description": "通知情報ID"},
+                "toUserId": {"type": "string", "description": "通知先のユーザーID"},
+                "byUserId": {"type": "string", "description": "通知元のユーザーID"},
+                "message": {"type": "string", "description": "通知内容"},
+                "entityId": {"type": "string", "description": "発生元のデータID"},
+                "entityType": {"type": "string", "description": "発生元のデータ種別"},
+                "isRead": {"type": "boolean", "description": "既読かどうか"},
+                "readAt": {"type": ["string", "null"], "format": "date-time", "description": "既読になった日時"},
+                "createdAt": {"type": "string", "format": "date-time", "description": "作成日時"},
+                "updatedAt": {"type": "string", "format": "date-time", "description": "更新日時"}
+              },
+              "required": ["id", "toUserId", "byUserId", "message", "entityId", "entityType", "isRead", "createdAt"]
+            }
+          }
+        },
+        "required": ["totalCount", "data"]
+      }
+    }
+  }
+  

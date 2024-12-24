@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Delete Work Item",
+    "type": "object",
+    "description": "Schema for the DELETE /workitem/workItems/{workItemIds} endpoint",
+    "endpoint": "/workitem/workItems/{workItemIds}",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "workItemIds": {
+            "type": "string",
+            "description": "削除するワークアイテムのID"
+          }
+        },
+        "required": ["workItemIds"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "affectedItems": {
+            "type": "array",
+            "description": "連鎖更新されたアイテム",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "description": "更新されたアイテムの情報"
+            }
+          }
+        },
+        "required": ["affectedItems"]
+      }
+    }
+  }
+  

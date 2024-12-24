@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Get Project",
+    "type": "object",
+    "description": "Schema for the GET /project/projects/{projectIds} endpoint",
+    "endpoint": "/project/projects/{projectIds}",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "projectIds": {
+            "type": "string",
+            "description": "プロジェクトID"
+          },
+          "projectCategoryFields": {
+            "type": "string",
+            "description": "取得するプロジェクトカテゴリ名"
+          },
+          "includes": {
+            "type": "string",
+            "description": "取得する従属オブジェクト (カンマ区切り)",
+            "enum": ["UserGroups", "Members", "WorkCalendar"]
+          }
+        },
+        "required": ["projectIds"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string", "description": "プロジェクトID"},
+          "name": {"type": "string", "description": "プロジェクト名"},
+          "code": {"type": "string", "description": "プロジェクトコード"},
+          "managerId": {"type": "string", "description": "マネージャーID"},
+          "managerName": {"type": "string", "description": "マネージャー名"},
+          "organizationId": {"type": "string", "description": "組織ID"},
+          "organizationName": {"type": "string", "description": "組織名"},
+          "isFinished": {"type": "boolean", "description": "プロジェクトが完了しているか"},
+          "standardUnitCost": {"type": "number", "description": "標準コスト単価"},
+          "createdAt": {"type": "string", "format": "date-time", "description": "作成日時"},
+          "updatedAt": {"type": "string", "format": "date-time", "description": "更新日時"}
+        },
+        "required": ["id", "name", "code", "managerId", "organizationId"],
+        "additionalProperties": false
+      }
+    }
+  }
+  

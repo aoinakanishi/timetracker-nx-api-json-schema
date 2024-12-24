@@ -1,0 +1,56 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Get Projects",
+    "type": "object",
+    "description": "Schema for the GET /project/projects endpoint",
+    "endpoint": "/project/projects",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string", "description": "プロジェクト名"},
+          "code": {"type": "string", "description": "プロジェクトのコード"},
+          "organizationIds": {"type": "string", "description": "組織ID"},
+          "managerIds": {"type": "string", "description": "管理者ID"},
+          "isManager": {
+            "type": "boolean",
+            "description": "true: 自身が管理者のプロジェクトのみ取得"
+          },
+          "isFinished": {
+            "type": "boolean",
+            "description": "true: 終了プロジェクトのみ取得"
+          },
+          "includes": {
+            "type": "string",
+            "description": "取得する従属オブジェクト（カンマ区切り）",
+            "enum": ["UserGroups", "Members", "WorkCalendar"]
+          },
+          "limit": {"type": "integer", "description": "データの最大取得件数"},
+          "offset": {"type": "integer", "description": "何件目のデータから取得するか"}
+        },
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "totalCount": {"type": "integer", "description": "検索条件に該当するプロジェクトの総数"},
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string", "description": "プロジェクトID"},
+                "name": {"type": "string", "description": "プロジェクト名"},
+                "code": {"type": "string", "description": "プロジェクトコード"},
+                "managerName": {"type": "string", "description": "管理者名"},
+                "isFinished": {"type": "boolean", "description": "プロジェクトが完了しているか"}
+              },
+              "required": ["id", "name", "code", "managerName"]
+            }
+          }
+        },
+        "required": ["totalCount", "data"]
+      }
+    }
+  }
+  

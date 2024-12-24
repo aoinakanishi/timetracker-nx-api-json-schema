@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Update User",
+    "type": "object",
+    "description": "Schema for the PUT /system/users/{userIds} endpoint",
+    "endpoint": "/system/users/{userIds}",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string", "description": "ユーザー名"},
+          "email": {"type": "string", "description": "Eメールアドレス"},
+          "organizationId": {"type": "string", "description": "所属する組織ID"},
+          "systemRoleId": {"type": "string", "description": "システムロールID"},
+          "password": {"type": "string", "description": "現在のパスワード"},
+          "newPassword": {"type": "string", "description": "新しいパスワード"},
+          "newPasswordConfirm": {"type": "string", "description": "新しいパスワード(確認用)"}
+        },
+        "required": ["userIds"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "null",
+        "description": "This endpoint does not return a response body."
+      }
+    }
+  }
+  

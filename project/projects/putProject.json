@@ -1,0 +1,161 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Update Project",
+    "type": "object",
+    "description": "Schema for the PUT /project/projects/{projectIds} endpoint",
+    "endpoint": "/project/projects/{projectIds}",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string", "description": "プロジェクト名"},
+          "code": {"type": "string", "description": "プロジェクトのコード"},
+          "description": {"type": "string", "description": "プロジェクトの説明"},
+          "managerId": {"type": "string", "description": "管理者ID"},
+          "manager": {"type": "string", "description": "管理者名"},
+          "organizationId": {"type": "string", "description": "所属する組織ID"},
+          "organization": {"type": "string", "description": "所属する組織名"},
+          "userGroupChange": {
+            "type": "object",
+            "description": "変更するユーザーグループ",
+            "properties": {
+              "adds": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "addUserIds": {
+                      "type": "array",
+                      "items": {"type": "string"},
+                      "description": "ユーザーグループに追加するユーザーID"
+                    },
+                    "name": {"type": "string", "description": "名前"},
+                    "englishName": {"type": "string", "description": "英語名"},
+                    "code": {"type": "string", "description": "コード"},
+                    "description": {"type": "string", "description": "説明"},
+                    "displayOrder": {"type": "number", "description": "表示順序"}
+                  },
+                  "required": ["name"]
+                }
+              },
+              "updates": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ids": {"type": "string", "description": "ユーザーグループID"},
+                    "addUserIds": {
+                      "type": "array",
+                      "items": {"type": "string"},
+                      "description": "ユーザーグループに追加するユーザーID"
+                    },
+                    "removeUserIds": {
+                      "type": "array",
+                      "items": {"type": "string"},
+                      "description": "ユーザーグループから削除するユーザーID"
+                    },
+                    "name": {"type": "string", "description": "名前"},
+                    "englishName": {"type": "string", "description": "英語名"},
+                    "code": {"type": "string", "description": "コード"},
+                    "description": {"type": "string", "description": "説明"},
+                    "displayOrder": {"type": "number", "description": "表示順序"}
+                  },
+                  "required": ["ids"]
+                }
+              },
+              "removes": {"type": "string", "description": "削除するユーザーグループ"}
+            }
+          },
+          "memberChange": {
+            "type": "object",
+            "description": "変更するメンバー情報",
+            "properties": {
+              "adds": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "partyId": {"type": "string", "description": "パーティID"},
+                    "partyType": {
+                      "type": "string",
+                      "description": "メンバーの種類",
+                      "enum": ["User"]
+                    },
+                    "unitCost": {"type": "number", "description": "コスト単価"}
+                  },
+                  "required": ["partyType"]
+                }
+              },
+              "updates": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ids": {"type": "string", "description": "メンバID"},
+                    "unitCost": {"type": "number", "description": "コスト単価"}
+                  },
+                  "required": ["ids"]
+                }
+              },
+              "removes": {
+                "type": "string",
+                "description": "削除するメンバID（カンマ区切り）"
+              },
+              "removeUsers": {
+                "type": "string",
+                "description": "削除するユーザー（ログイン名またはメールアドレス）"
+              }
+            }
+          },
+          "forceUnlock": {"type": "boolean", "description": "強制的にロック解除するか"},
+          "plannedStartDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "プロジェクト開始日"
+          },
+          "plannedFinishDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "プロジェクト終了日"
+          },
+          "standardUnitCost": {"type": "number", "description": "標準コスト単価"},
+          "isFinished": {"type": "boolean", "description": "プロジェクトを終了するか"},
+          "projectCategories": {
+            "type": "object",
+            "description": "プロジェクトカテゴリ",
+            "additionalProperties": {"type": "string"}
+          },
+          "allowEditingItemsWithBrowsePermission": {
+            "type": "boolean",
+            "description": "閲覧権限があるアイテムの編集を許可するか"
+          },
+          "recordTransitionData": {
+            "type": "boolean",
+            "description": "推移データを記録するか"
+          }
+        },
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string", "description": "プロジェクトID"},
+            "addedMemberIds": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "追加されたメンバーID"
+            },
+            "addedUserGroupIds": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "追加されたユーザーグループID"
+            }
+          },
+          "required": ["id"]
+        }
+      }
+    }
+  }
+  

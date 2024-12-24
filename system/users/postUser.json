@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Add User",
+    "type": "object",
+    "description": "Schema for the POST /system/users endpoint",
+    "endpoint": "/system/users",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string", "description": "ユーザー名"},
+          "loginName": {"type": "string", "description": "ログイン名"},
+          "password": {"type": "string", "description": "パスワード"},
+          "passwordConfirm": {"type": "string", "description": "パスワード(確認用)"},
+          "organizationId": {"type": "string", "description": "組織ID"},
+          "systemRoleId": {"type": "string", "description": "システムロールID"}
+        },
+        "required": ["name", "loginName", "password", "passwordConfirm", "systemRoleId"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string", "description": "追加したユーザーのID"},
+          "createdAt": {"type": "string", "format": "date-time", "description": "作成日時"},
+          "updatedAt": {"type": "string", "format": "date-time", "description": "更新日時"}
+        },
+        "required": ["id", "createdAt", "updatedAt"],
+        "additionalProperties": false
+      }
+    }
+  }
+  

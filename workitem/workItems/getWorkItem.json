@@ -1,0 +1,57 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Get Work Item",
+    "type": "object",
+    "description": "Schema for the GET /workitem/workItems/{workItemIds} endpoint",
+    "endpoint": "/workitem/workItems/{workItemIds}",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "workItemIds": {
+            "type": "string",
+            "description": "ワークアイテムID"
+          },
+          "fields": {
+            "type": "string",
+            "description": "取得するフィールド (カンマ区切り)"
+          }
+        },
+        "required": ["workItemIds"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "object",
+              "properties": {
+                "Id": {"type": "string", "description": "ワークアイテムID"},
+                "StatusTypeId": {"type": "string", "description": "ステータスタイプID"},
+                "Name": {"type": "string", "description": "ワークアイテム名"},
+                "ActualProgress": {"type": "number", "description": "実績進捗率"},
+                "PlannedStartDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "計画開始日"
+                },
+                "PlannedFinishDate": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "計画終了日"
+                },
+                "PlannedTime": {"type": "integer", "description": "計画時間（分単位）"},
+                "ActualTime": {"type": "integer", "description": "実績時間（分単位）"}
+              },
+              "required": ["Id", "Name", "PlannedStartDate", "PlannedFinishDate"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["fields"]
+        }
+      }
+    }
+  }
+  

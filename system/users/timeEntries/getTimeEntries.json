@@ -1,0 +1,81 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Get Time Entries",
+    "type": "object",
+    "description": "Schema for the GET /system/users/{userId}/timeEntries endpoint",
+    "endpoint": "/system/users/{userId}/timeEntries",
+    "properties": {
+      "request": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "ユーザーID"
+          },
+          "projectId": {
+            "type": "string",
+            "description": "プロジェクトID"
+          },
+          "processCategoryId": {
+            "type": "string",
+            "description": "工程分類ID"
+          },
+          "timeEntryCategoryId": {
+            "type": "string",
+            "description": "作業分類ID"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "description": "検索開始日"
+          },
+          "finishDate": {
+            "type": "string",
+            "format": "date",
+            "description": "検索終了日"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "データの最大取得件数"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "何件目のデータから取得するか"
+          },
+          "orderby": {
+            "type": "string",
+            "description": "並び替えに用いるフィールド"
+          }
+        },
+        "required": ["userId"],
+        "additionalProperties": false
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "description": "検索条件に該当する実績工数の総数"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "string", "description": "実績工数ID"},
+                "workDate": {"type": "string", "format": "date-time", "description": "作業日"},
+                "startTime": {"type": "string", "format": "date-time", "description": "開始時刻"},
+                "finishTime": {"type": "string", "format": "date-time", "description": "終了時刻"},
+                "time": {"type": "integer", "description": "工数（分単位）"},
+                "memo": {"type": "string", "description": "メモ"}
+              },
+              "required": ["id", "workDate", "startTime", "finishTime"]
+            }
+          }
+        },
+        "required": ["totalCount", "data"],
+        "additionalProperties": false
+      }
+    }
+  }
+  
