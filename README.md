@@ -108,7 +108,3 @@ Each schema follows the [JSON Schema Draft 7](https://json-schema.org/specificat
 ## 📄 License
 
 This repository is licensed under the MIT License. See the `LICENSE` file for more information.
-
----
-
-必要に応じてさらに修正できます！
